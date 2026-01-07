@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - SASWAT PALO</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #020617;
+            --primary: #38bdf8;
+            --secondary: #a78bfa;
+            --text-light: #e5e7eb;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #020617, #0f172a);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            color: var(--primary);
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin-top: 12px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: #020617;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 15px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            left: 0;
+            bottom: -6px;
+            transition: 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* Sections */
+        section {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 45px;
+            background: var(--card-dark);
+            border-radius: 16px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+
+        section h2 {
+            font-size: 1.9rem;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--primary);
+            padding-left: 15px;
+            color: var(--primary);
+        }
+
+        /* About */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .about-img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 0 25px rgba(56,189,248,0.4);
+            border: 2px solid var(--primary);
+        }
+
+        .about-text {
+            line-height: 1.8;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Skills */
+        ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 18px;
+        }
+
+        ul li {
+            background: linear-gradient(135deg, #020617, #020617);
+            border: 1px solid var(--secondary);
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--secondary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(167,139,250,0.4);
+        }
+
+        /* Projects */
+        .project {
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            background: #020617;
+            border-left: 5px solid var(--secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .project h3 {
+            color: var(--secondary);
+        }
+
+        .project:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Contact */
+        #contact p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+
+            nav {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-img {
+                width: 170px;
+                height: 170px;
+            }
+
+            section {
+                margin: 30px 15px;
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SASWAT PALO</h1>
+        <p><i>CSE Undergrad</i><br><i>Specialization in Artificial Intelligence and Machine Learning</i></p>
+        </header>
+        <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-container">
+        <img src = "images/IMG_20240606_095013 (1).jpg"
+        alt = "Image of Saswat Palo"
+        class="about-img">
+            <div class="about-text">
+        <p>
+                    I am Saswat Palo, a first-year B.Tech Computer Science Engineering
+                    student specializing in Artificial Intelligence and Machine Learning.
+                    I have basic knowledge of Python, Java, HTML and a strong interest in
+                    technology, problem-solving, and software development.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>Python</li>
+            <li>Java</li>
+            <li>HTML</li>
+            <li>Problem Solving</li>
+            <li>Literature</li>
+        </ul>
+    </section>
+     <section id="projects">
+        <h2>Projects</h2>
+        <div class="project">
+            <h3>Electricity Billing System</h3>
+            <p>Smart billing system with consumption analytics using logical programming.</p>
+        </div>
+        <div class="project">
+            <h3>Smart Unit Converter</h3>
+            <p>A simple yet powerful Java-based Smart Unit Converter that allows users to quickly convert between multiple units across different categories.</p>
+        </div>
+        <div class="project">
+            <h3>Pizza Order Program</h3>
+            <p>An interactive Python-based Pizza Ordering System that lets users customize their pizza step-by-step and generates a complete order summary along with the final bill amount.</p>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <p>Email: palosaswat@gmail.com</p>
+        <p><a href = "https://www.linkedin.com/in/saswat-palo-b31997373?utm_source=share_via&utm_content=profile&utm_medium=member_android/" target="_blank">LinkedIn Profile</a></p>
+        <p>
+        <a href="https://github.com/Saswat-Palo/"target="_blank">GitHub Profile for Project Links</a></p>
+    </section>
+    <footer>
+        <p>© 2026 Saswat Palo</p>
+    </footer>
+</body>
+</html>
