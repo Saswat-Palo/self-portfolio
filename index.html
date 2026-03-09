@@ -1,279 +1,491 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - SASWAT PALO</title>
-    <style>
-        :root {
-            --bg-dark: #0f172a;
-            --card-dark: #020617;
-            --primary: #38bdf8;
-            --secondary: #a78bfa;
-            --text-light: #e5e7eb;
-            --text-muted: #94a3b8;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Saswat Palo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #050505;
+  --bg-gradient: radial-gradient(circle at top left, #1a1025, #050505, #0a0f1c);
+  --card-dark: rgba(17, 24, 39, 0.6);
+  --primary: #0ea5e9; 
+  --secondary: #8b5cf6; 
+  --accent: #f43f5e; 
+  --text-light: #f8fafc;
+  --text-muted: #cbd5e1;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-light);
+  scroll-behavior: smooth;
+  line-height: 1.6;
+}
+h1, h2, h3, .welcome-text {
+  font-family: 'Poppins', sans-serif;
+}
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #050505;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeOut 1s ease 2.5s forwards;
+}
+.welcome-text {
+  font-size: 3.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 6px;
+  animation: zoomIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes zoomIn {
+  0% { transform: scale(0.8); opacity: 0; filter: blur(10px); }
+  100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+.hero {
+  text-align: center;
+  padding: 15vh 20px 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.hero-title {
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+.hero-subtitle {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.hero-desc {
+  max-width: 600px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+}
+.hero-buttons a {
+  text-decoration: none;
+  padding: 14px 32px;
+  margin: 10px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  box-shadow: 0 10px 20px -10px var(--secondary);
+}
+.hero-buttons a:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 25px -10px var(--primary);
+}
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(5, 5, 5, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  gap: 40px;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  position: relative;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  left: 0;
+  bottom: -6px;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+nav a:hover { color: var(--text-light); }
+nav a:hover::after { width: 100%; }
+section {
+  max-width: 1000px;
+  margin: 80px auto;
+  padding: 50px;
+  background: var(--card-dark);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  display: inline-block;
+  position: relative;
+}
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 50%;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), transparent);
+  border-radius: 2px;
+}
+.about-container {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.about-img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 30%;
+  box-shadow: 0 10px 30px rgba(14, 165, 233, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s ease;
+}
+.about-img:hover {
+  transform: translateY(-10px) rotate(2deg);
+  border-color: var(--primary);
+}
+.about-text p {
+  margin-bottom: 15px;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+ul li {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 500;
+  color: var(--text-light);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+ul li:before {
+  content: '•';
+  color: var(--primary);
+  font-size: 1.5rem;
+  line-height: 0;
+}
+ul li:hover {
+  transform: translateY(-3px);
+  background: rgba(14, 165, 233, 0.1);
+  border-color: var(--primary);
+  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.2);
+}
+.project {
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.project:hover {
+  transform: translateY(-8px);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+.project h3 {
+  font-size: 1.6rem;
+  color: var(--text-light);
+  margin-bottom: 15px;
+}
+.project p {
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+.project-details {
+  margin-bottom: 25px;
+  color: var(--text-muted);
+  padding-left: 20px;
+}
+.project-details li {
+  margin-bottom: 8px;
+  list-style-type: square;
+}
+.project-details li::marker {
+  color: var(--secondary);
+}
+.btn-group {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  color: var(--text-light);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+.github-btn:hover {
+  background: var(--text-light);
+  color: var(--bg-dark);
+  transform: translateY(-2px);
+}
+.github-btn.live-link {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border: none;
+  color: white;
+}
+.github-btn.live-link:hover {
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+  color: white;
+}
+.contact-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  width: 200px;
+  text-decoration: none;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+.contact-card i {
+  font-size: 2.5rem;
+  color: var(--primary);
+  transition: transform 0.3s ease;
+}
+.contact-card span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.contact-card:hover {
+  border-color: var(--secondary);
+  background: rgba(139, 92, 246, 0.05);
+  color: var(--text-light);
+  transform: translateY(-5px);
+}
+.contact-card:hover i {
+  transform: scale(1.1);
+  color: var(--secondary);
+}
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 50px;
+}
+@media(max-width: 768px) {
+  .hero-title { font-size: 3rem; }
+  
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  section h2::after {
+    left: 25%;
+  }
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            scroll-behavior: smooth;
-        }
-
-        /* Header */
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #020617, #0f172a);
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-            color: var(--primary);
-            letter-spacing: 1px;
-        }
-
-        header p {
-            margin-top: 12px;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-        }
-
-        /* Navigation */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background-color: #020617;
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 40px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.6);
-        }
-
-        nav a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 15px;
-            position: relative;
-        }
-
-        nav a::after {
-            content: "";
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--secondary);
-            left: 0;
-            bottom: -6px;
-            transition: 0.3s ease;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        nav a:hover {
-            color: var(--secondary);
-        }
-
-        /* Sections */
-        section {
-            max-width: 1000px;
-            margin: 60px auto;
-            padding: 45px;
-            background: var(--card-dark);
-            border-radius: 16px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-        }
-
-        section h2 {
-            font-size: 1.9rem;
-            margin-bottom: 30px;
-            border-left: 5px solid var(--primary);
-            padding-left: 15px;
-            color: var(--primary);
-        }
-
-        /* About */
-        .about-container {
-            display: flex;
-            align-items: center;
-            gap: 45px;
-        }
-
-        .about-img {
-            width: 220px;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 0 25px rgba(56,189,248,0.4);
-            border: 2px solid var(--primary);
-        }
-
-        .about-text {
-            line-height: 1.8;
-            font-size: 1rem;
-            color: var(--text-light);
-        }
-
-        /* Skills */
-        ul {
-            list-style: none;
-            padding: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 18px;
-        }
-
-        ul li {
-            background: linear-gradient(135deg, #020617, #020617);
-            border: 1px solid var(--secondary);
-            padding: 14px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 600;
-            color: var(--secondary);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        ul li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px rgba(167,139,250,0.4);
-        }
-
-        /* Projects */
-        .project {
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            background: #020617;
-            border-left: 5px solid var(--secondary);
-            transition: transform 0.3s ease;
-        }
-
-        .project h3 {
-            color: var(--secondary);
-        }
-
-        .project:hover {
-            transform: translateY(-6px);
-        }
-
-        /* Contact */
-        #contact p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-        }
-
-        /* Footer */
-        footer {
-            background: #020617;
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-
-            nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .about-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .about-img {
-                width: 170px;
-                height: 170px;
-            }
-
-            section {
-                margin: 30px 15px;
-                padding: 30px;
-            }
-        }
-    </style>
+  nav { gap: 20px; padding: 15px; font-size: 0.85rem;}
+  
+  section {
+    margin: 40px 15px;
+    padding: 30px 20px;
+  }
+  
+  .contact-grid { flex-direction: column; align-items: center; }
+  .contact-card { width: 100%; max-width: 300px; flex-direction: row; justify-content: flex-start; padding: 20px 30px;}
+}
+</style>
 </head>
 <body>
-    <header>
-        <h1>SASWAT PALO</h1>
-        <p><i>CSE Undergrad</i><br><i>Specialization in Artificial Intelligence and Machine Learning</i></p>
-        </header>
-        <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-container">
-        <img src = "images/profile_sp.jpg"
-        alt = "Image of Saswat Palo"
-        class="about-img">
-            <div class="about-text">
-        <p>
-                    I am Saswat Palo, a first-year B.Tech Computer Science Engineering
-                    student specializing in Artificial Intelligence and Machine Learning.
-                    I have basic knowledge of Python, Java, HTML 
-                    and a strong interest in technology, problem-solving, and software development.
-                    Currently pursuing B.Tech in ITER SOA University, have completed my     
-                    12th with 79% and 10th with 80% from CBSE Board.
-                </p>
-            </div>
-        </div>
-    </section>
-    <section id="skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>Python</li>
-            <li>Java</li>
-            <li>HTML</li>
-            <li>Problem Solving</li>
-            <li>Literature</li>
-        </ul>
-    </section>
-     <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Electricity Billing System</h3>
-            <p>Smart billing system with consumption analytics using logical programming.</p>
-        </div>
-        <div class="project">
-            <h3>Smart Unit Converter</h3>
-            <p>A simple yet powerful Java-based Smart Unit Converter that allows users to quickly convert between multiple units across different categories.</p>
-        </div>
-        <div class="project">
-            <h3>Pizza Order Program</h3>
-            <p>An interactive Python-based Pizza Ordering System that lets users customize their pizza step-by-step and generates a complete order summary along with the final bill amount.</p>
-        </div>
-    </section>
-    <section id="contact">
-        <h2>Contact Me</h2>
-        <p>Email: palosaswat@gmail.com</p>
-        <p><a href = "https://www.linkedin.com/in/saswat-palo-b31997373?utm_source=share_via&utm_content=profile&utm_medium=member_android/" target="_blank">LinkedIn Profile</a></p>
-        <p>
-        <a href="https://github.com/Saswat-Palo/"target="_blank">GitHub Profile for Project Links</a></p>
-    </section>
-    <footer>
-        <p>© 2026 Saswat Palo</p>
-    </footer>
+<div id="intro">
+  <h1 class="welcome-text">Welcome</h1>
+</div>
+<header class="hero">
+  <h1 class="hero-title">Saswat Palo</h1>
+  <p class="hero-subtitle">Computer Science Engineering Student</p>
+  <p class="hero-desc">
+    Specializing in Artificial Intelligence and Machine Learning, passionate
+    about building technology that solves real-world problems.
+  </p>
+  <div class="hero-buttons">
+    <a href="#contact">Contact Me</a>
+  </div>
+</header>
+<nav>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#contact">Contact</a>
+</nav>
+<section id="about">
+  <h2>About Me</h2>
+  <div class="about-container">
+    <img src="images/profile_sp.jpg" alt="Saswat Palo" class="about-img">
+    <div class="about-text">
+      <p>
+        Hello! I am Saswat Palo, a first-year B.Tech Computer Science Engineering
+        student at ITER, Siksha 'O' Anusandhan (SOA), specializing in Artificial
+        Intelligence and Machine Learning.
+      </p>
+      <p>
+        I am passionate about technology and enjoy exploring how software and
+        intelligent systems can solve real-world problems. I have experience with
+        programming languages such as Python and Java along with basic web
+        development using HTML.
+      </p>
+      <p>
+        Currently, I am focused on building a strong career in the field of
+        Artificial Intelligence and Machine Learning while continuously improving
+        my programming, problem-solving, and software development skills.
+      </p>
+    </div>
+  </div>
+</section>
+<section id="skills">
+  <h2>Technical Skills</h2>
+  <ul>
+    <li>Python</li>
+    <li>Java</li>
+    <li>HTML & CSS</li>
+    <li>Problem Solving</li>
+    <li>Literature</li>
+  </ul>
+</section>
+<section id="projects">
+  <h2>Featured Projects</h2>
+  <div class="project">
+    <h3>Campbuzz</h3>
+    <ul class="project-details">
+      <li><strong>Frontend Development:</strong> Built a responsive and user-friendly interface using HTML, CSS, and JavaScript.</li>
+      <li><strong>Project Management:</strong> Coordinated timeline and milestones to keep the team aligned and moving forward.</li>
+      <li><strong>Market Research:</strong> Analyzed student needs to ensure the platform solves real communication gaps on campus.</li>
+    </ul>
+    <div class="btn-group">
+      <a href="https://campbuzz.info/" target="_blank" class="github-btn live-link">
+        <i class="fa-solid fa-globe"></i> Visit Site
+      </a>
+      <a href="https://github.com/campbuzz1/campBuzz.git" target="_blank" class="github-btn">
+        <i class="fa-brands fa-github"></i> View Code
+      </a>
+    </div>
+  </div>
+
+  <div class="project">
+    <h3>Electricity Billing System</h3>
+    <p>Smart billing system with consumption analytics utilizing logical programming fundamentals.</p>
+    <div class="btn-group">
+      <a href="https://github.com/Saswat-Palo" target="_blank" class="github-btn">
+        <i class="fa-brands fa-github"></i> View Code
+      </a>
+    </div>
+  </div>
+  <div class="project">
+    <h3>Smart Unit Converter</h3>
+    <p>A Java-based application designed to seamlessly convert between multiple complex unit categories.</p>
+    <div class="btn-group">
+      <a href="https://github.com/Saswat-Palo/Smart-Unit-Converter.git" target="_blank" class="github-btn">
+        <i class="fa-brands fa-github"></i> View Code
+      </a>
+    </div>
+  </div>
+
+  <div class="project">
+    <h3>Pizza Order Program</h3>
+    <p>An interactive Python application allowing users to fully customize pizza orders and generate automated final billing.</p>
+    <div class="btn-group">
+      <a href="https://github.com/Saswat-Palo/Pizza-order-program.git" target="_blank" class="github-btn">
+        <i class="fa-brands fa-github"></i> View Code
+      </a>
+    </div>
+  </div>
+</section>
+<section id="contact">
+  <h2>Let's Connect</h2>
+  <div class="contact-grid">
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=palosaswat@gmail.com&su=Contact%20from%20Portfolio" target="_blank" rel="noopener noreferrer" class="contact-card">
+      <i class="fa-solid fa-envelope"></i>
+      <span>Email Me</span>
+    </a>
+    <a href="https://www.linkedin.com/in/saswat-palo-b31997373" target="_blank" class="contact-card">
+      <i class="fa-brands fa-linkedin"></i>
+      <span>LinkedIn</span>
+    </a>
+    <a href="https://github.com/Saswat-Palo" target="_blank" class="contact-card">
+      <i class="fa-brands fa-github"></i>
+      <span>GitHub</span>
+    </a>
+  </div>
+</section>
+<footer>
+  <p>© 2026 Saswat Palo. All rights reserved.</p>
+</footer>
 </body>
-
 </html>
-
-
