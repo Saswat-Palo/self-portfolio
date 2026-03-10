@@ -98,7 +98,7 @@ h1, h2, h3 {
   z-index: 9999;
 }
 #intro.fade-out-intro {
-  animation: curtainReveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  animation: curtainReveal 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 #intro-svg {
   width: 100%;
@@ -119,11 +119,11 @@ h1, h2, h3 {
 }
 .draw-text {
   animation: 
-    drawOutline 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-    fillGradient 1s ease 1s forwards;
+    drawOutline 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    fillGradient 0.4s ease 0.4s forwards;
 }
 .erase-text {
-  animation: fadeOutBlur 0.6s ease forwards;
+  animation: fadeOutBlur 0.3s ease forwards;
 }
 @keyframes drawOutline {
   0% { stroke-dashoffset: 2000; stroke: url(#text-grad); fill: transparent; }
@@ -673,12 +673,12 @@ footer {
     const textElement = document.getElementById("anim-text");
     const introScreen = document.getElementById("intro");   
     const words = ["Welcome", "Namaste", "नमस्ते"];
-    let wordIndex = 0;
+    let wordIndex = 0; 
     function animateWord() {
       textElement.textContent = words[wordIndex];
       textElement.classList.remove("draw-text", "erase-text");
       void textElement.offsetWidth; 
-      textElement.classList.add("draw-text");
+      textElement.classList.add("draw-text");     
       setTimeout(() => {
         if (wordIndex < words.length - 1) {
           textElement.classList.remove("draw-text");
@@ -686,15 +686,15 @@ footer {
           setTimeout(() => {
             wordIndex++;
             animateWord();
-          }, 600); 
+          }, 300);
         } else {
           setTimeout(() => {
             introScreen.classList.add("fade-out-intro");
-          }, 800);
+          }, 300);
         }
-      }, 2600); 
+      }, 900);
     }
-    setTimeout(animateWord, 300);
+    setTimeout(animateWord, 100); 
   });
 </script>
 </body>
