@@ -28,6 +28,19 @@ body {
   scroll-behavior: smooth;
   line-height: 1.6;
   position: relative;
+  opacity: 0;
+  animation: fadeInPage 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+body.fade-out {
+  animation: fadeOutPage 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes fadeInPage {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOutPage {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-15px); }
 }
 .background-animation {
   position: fixed;
@@ -283,7 +296,6 @@ section h2::after {
   color: var(--text-muted);
   font-size: 1.05rem;
 }
-
 ul {
   list-style: none;
   display: flex;
@@ -358,18 +370,6 @@ ul li:hover::after {
 .project p {
   color: var(--text-muted);
   margin-bottom: 20px;
-}
-.poetry-text {
-  font-style: italic;
-  color: #e2e8f0;
-  line-height: 1.9;
-  padding-left: 20px;
-  border-left: 3px solid transparent;
-  border-image: linear-gradient(to bottom, var(--primary), var(--secondary)) 1;
-  margin-top: 20px;
-  background: rgba(255, 255, 255, 0.02);
-  padding: 20px;
-  border-radius: 0 10px 10px 0;
 }
 .project-details {
   margin-bottom: 25px;
@@ -524,7 +524,7 @@ footer {
   <a href="#about">About</a>
   <a href="#skills">Skills</a>
   <a href="#projects">Projects</a>
-  <a href="#literature">Literature</a>
+  <a href="literature.html" class="page-transition">Literature</a>
   <a href="#contact">Contact</a>
 </nav>
 <section id="about">
@@ -608,44 +608,13 @@ footer {
 </section>
 <section id="literature">
   <h2>Literature & Poetry</h2> 
-  <div class="project">
-    <h3><i class="fa-solid fa-pen-nib" style="color: var(--accent);"></i> Teri Khusi </h3>
-    <div class="poetry-text">
-      Ekdin kabhi jo roz milte the<br>
-      Aaj bass baten hoti hai<br>
-      Tujhe dekh ke maine samjha<br>
-      kambakht ishq kya hoti hai<br>
-      Tujhse baat karke maine jana<br>
-      Koyal ki cheh chehat kaisi hoti hai<br>
-      Tere jheel si ankhon mai hum jo fase<br>
-      Ehsas tab hua mohabaat hai sirf tumse<br>
-      Gum nahi agar tu jo na kahe<br>
-      Khusi isime hai ki tu humesha khush rahe<br>
-      Khusi isime hai ki tu humesha khush rahe
-    </div>
-  </div>
-  <div class="project">
-    <h3><i class="fa-solid fa-feather" style="color: var(--secondary);"></i> Thandi Subahen </h3>
-    <div class="poetry-text">
-      Sardiyan darwaze par dastak de rahi hain<br>
-      Phir se wahi thandi subahen aa gayi hain<br>
-      Ruh par thand ki halki si parat hai<br>
-      Hothon pe nami,<br>
-      Dill mein kuch dabii si baat hai.<br>
-      Band kamron mein chadar odhe<br>
-      Kayi dekh rahe bade bade sapne<br>
-      Kisiko apnon ka apna banna hai<br>
-      Kisiko khud ka pyara sa ghar sajana hai.<br>
-      Kahin na kahin, in sardiyon mein hi<br>
-      Akelepan ka sabse gehra ehsas hota hai.<br>
-      Kyuki chutiyon ke baad<br>
-      Woh andar ka bachcha bhi bada ho jata hai.<br>
-      Woh halki halki dhoop ki kiran se,<br>
-      Woh hawle hawle hawa ki lehar se<br>
-      Pyaar sabko hota hai, magar dil mein<br>
-      Armaan dabaye hue har koi<br>
-      Apni mushakkat mein khoya hua hota hai.
-    </div>
+  <div class="project" style="text-align: center;">
+    <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 1.1rem;">
+      Beyond the world of logic and code, I love expressing my thoughts and emotions through poetry and shayaris. 
+    </p>
+    <a href="literature.html" class="github-btn live-link page-transition" style="text-decoration: none; padding: 12px 25px; font-size: 1rem;">
+      <i class="fa-solid fa-book-open"></i> Read My Shayaris
+    </a>
   </div>
 </section>
 <section id="contact">
@@ -695,6 +664,19 @@ footer {
       }, 900);
     }
     setTimeout(animateWord, 100); 
+    const transitionLinks = document.querySelectorAll('.page-transition');
+    transitionLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetUrl = this.getAttribute('href');
+        if (targetUrl && !targetUrl.startsWith('#')) {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 400); 
+        }
+      });
+    });
   });
 </script>
 </body>
