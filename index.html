@@ -296,6 +296,7 @@ section h2::after {
   color: var(--text-muted);
   font-size: 1.05rem;
 }
+
 ul {
   list-style: none;
   display: flex;
@@ -560,6 +561,7 @@ footer {
     <li>Problem Solving</li>
   </ul>
 </section>
+
 <section id="projects">
   <h2>Featured Projects</h2> 
   <div class="project">
@@ -639,31 +641,36 @@ footer {
 </footer>
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const textElement = document.getElementById("anim-text");
     const introScreen = document.getElementById("intro");   
-    const words = ["Welcome", "Namaste", "नमस्ते"];
-    let wordIndex = 0; 
-    function animateWord() {
-      textElement.textContent = words[wordIndex];
-      textElement.classList.remove("draw-text", "erase-text");
-      void textElement.offsetWidth; 
-      textElement.classList.add("draw-text");     
-      setTimeout(() => {
-        if (wordIndex < words.length - 1) {
-          textElement.classList.remove("draw-text");
-          textElement.classList.add("erase-text"); 
-          setTimeout(() => {
-            wordIndex++;
-            animateWord();
-          }, 300);
-        } else {
-          setTimeout(() => {
-            introScreen.classList.add("fade-out-intro");
-          }, 300);
-        }
-      }, 900);
+    if (sessionStorage.getItem("introPlayed")) {
+      introScreen.style.display = "none";
+    } else {
+      const textElement = document.getElementById("anim-text");
+      const words = ["Welcome", "Namaste", "नमस्ते"];
+      let wordIndex = 0; 
+      function animateWord() {
+        textElement.textContent = words[wordIndex];
+        textElement.classList.remove("draw-text", "erase-text");
+        void textElement.offsetWidth; 
+        textElement.classList.add("draw-text");     
+        setTimeout(() => {
+          if (wordIndex < words.length - 1) {
+            textElement.classList.remove("draw-text");
+            textElement.classList.add("erase-text"); 
+            setTimeout(() => {
+              wordIndex++;
+              animateWord();
+            }, 300);
+          } else {
+            setTimeout(() => {
+              introScreen.classList.add("fade-out-intro");
+              sessionStorage.setItem("introPlayed", "true");
+            }, 300);
+          }
+        }, 900);
+      }
+      setTimeout(animateWord, 100); 
     }
-    setTimeout(animateWord, 100); 
     const transitionLinks = document.querySelectorAll('.page-transition');
     transitionLinks.forEach(link => {
       link.addEventListener('click', function(e) {
