@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio - Saswat Palo</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Kalam:wght@700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-dark: #050505;
-  --bg-gradient: radial-gradient(circle at top left, #1a1025, #050505, #0a0f1c);
-  --card-dark: rgba(17, 24, 39, 0.6);
+  --bg-dark: #000000;
+  --card-dark: rgba(17, 24, 39, 0.45); 
   --primary: #0ea5e9; 
   --secondary: #8b5cf6; 
   --accent: #f43f5e; 
@@ -24,13 +23,66 @@
 }
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--bg-gradient);
-  background-attachment: fixed;
+  background-color: var(--bg-dark);
   color: var(--text-light);
   scroll-behavior: smooth;
   line-height: 1.6;
+  position: relative;
 }
-h1, h2, h3, .welcome-text {
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: #000;
+  overflow: hidden;
+}
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.65;
+  animation: floatOrb 25s infinite linear;
+}
+.orb-1 {
+  width: 50vw; height: 50vw;
+  background: radial-gradient(circle, var(--primary), transparent 70%);
+  top: -20vh; left: -10vw;
+}
+.orb-2 {
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, var(--secondary), transparent 70%);
+  bottom: -20vh; right: -10vw;
+  animation-direction: reverse;
+}
+.orb-3 {
+  width: 40vw; height: 40vw;
+  background: radial-gradient(circle, var(--accent), transparent 70%);
+  top: 40vh; left: 30vw;
+  animation-delay: -5s;
+}
+.grid-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  animation: panGrid 15s linear infinite;
+}
+@keyframes floatOrb {
+  0% { transform: rotate(0deg) translate(50px) rotate(0deg); }
+  100% { transform: rotate(360deg) translate(50px) rotate(-360deg); }
+}
+@keyframes panGrid {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+h1, h2, h3 {
   font-family: 'Poppins', sans-serif;
 }
 #intro {
@@ -39,27 +91,60 @@ h1, h2, h3, .welcome-text {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: #050505;
+  background: #000; 
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  animation: fadeOut 1s ease 2.5s forwards;
 }
-.welcome-text {
-  font-size: 3.5rem;
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 6px;
-  animation: zoomIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+#intro.fade-out-intro {
+  animation: curtainReveal 1s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
-@keyframes zoomIn {
-  0% { transform: scale(0.8); opacity: 0; filter: blur(10px); }
-  100% { transform: scale(1); opacity: 1; filter: blur(0); }
+#intro-svg {
+  width: 100%;
+  height: 200px;
+  max-width: 800px;
 }
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
+#anim-text {
+  font-family: 'Kalam', cursive;
+  font-size: 6.5rem;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 2px;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+}
+.draw-text {
+  animation: 
+    drawOutline 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    fillGradient 1s ease 1s forwards;
+}
+.erase-text {
+  animation: fadeOutBlur 0.6s ease forwards;
+}
+@keyframes drawOutline {
+  0% { stroke-dashoffset: 2000; stroke: url(#text-grad); fill: transparent; }
+  100% { stroke-dashoffset: 0; stroke: url(#text-grad); fill: transparent; }
+}
+@keyframes fillGradient {
+  0% { fill: transparent; }
+  100% { fill: url(#text-grad); }
+}
+@keyframes fadeOutBlur {
+  0% { opacity: 1; filter: blur(0px); transform: scale(1); }
+  100% { opacity: 0; filter: blur(10px); transform: scale(0.95); }
+}
+@keyframes curtainReveal {
+  0% { transform: translateY(0); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+  100% { 
+    transform: translateY(-100vh); 
+    border-bottom-left-radius: 50%; 
+    border-bottom-right-radius: 50%;
+    visibility: hidden; 
+  }
 }
 .hero {
   text-align: center;
@@ -68,6 +153,8 @@ h1, h2, h3, .welcome-text {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 .hero-title {
   font-size: 4rem;
@@ -111,13 +198,13 @@ h1, h2, h3, .welcome-text {
 nav {
   position: sticky;
   top: 0;
-  background: rgba(5, 5, 5, 0.8);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   display: flex;
   justify-content: center;
   padding: 20px;
-  gap: 40px;
+  gap: 30px;
   z-index: 100;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -149,11 +236,13 @@ section {
   margin: 80px auto;
   padding: 50px;
   background: var(--card-dark);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 1;
 }
 section h2 {
   font-size: 2.2rem;
@@ -194,6 +283,7 @@ section h2::after {
   color: var(--text-muted);
   font-size: 1.05rem;
 }
+
 ul {
   list-style: none;
   display: flex;
@@ -201,13 +291,15 @@ ul {
   gap: 15px;
 }
 ul li {
+  position: relative;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 12px 24px;
   border-radius: 50px;
   font-weight: 500;
   color: var(--text-light);
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -217,34 +309,67 @@ ul li:before {
   color: var(--primary);
   font-size: 1.5rem;
   line-height: 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+ul li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: all 0.6s ease;
 }
 ul li:hover {
-  transform: translateY(-3px);
-  background: rgba(14, 165, 233, 0.1);
-  border-color: var(--primary);
-  box-shadow: 0 5px 15px rgba(14, 165, 233, 0.2);
+  transform: translateY(-5px) scale(1.05);
+  background: rgba(139, 92, 246, 0.15);
+  border-color: var(--secondary);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+ul li:hover:before {
+  color: var(--accent);
+  transform: scale(1.3);
+}
+ul li:hover::after {
+  left: 100%;
 }
 .project {
   padding: 30px;
   margin-bottom: 30px;
   border-radius: 20px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .project:hover {
   transform: translateY(-8px);
   border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 .project h3 {
   font-size: 1.6rem;
   color: var(--text-light);
   margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .project p {
   color: var(--text-muted);
   margin-bottom: 20px;
+}
+.poetry-text {
+  font-style: italic;
+  color: #e2e8f0;
+  line-height: 1.9;
+  padding-left: 20px;
+  border-left: 3px solid transparent;
+  border-image: linear-gradient(to bottom, var(--primary), var(--secondary)) 1;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  border-radius: 0 10px 10px 0;
 }
 .project-details {
   margin-bottom: 25px;
@@ -254,7 +379,10 @@ ul li:hover {
 .project-details li {
   margin-bottom: 8px;
   list-style-type: square;
+  background: none; border: none; padding: 0; border-radius: 0; transform: none; box-shadow: none; display: list-item; overflow: visible;
 }
+.project-details li:before, .project-details li::after { display: none; }
+.project-details li:hover { transform: none; background: none; box-shadow: none; border: none;}
 .project-details li::marker {
   color: var(--secondary);
 }
@@ -304,7 +432,7 @@ ul li:hover {
   justify-content: center;
   gap: 12px;
   padding: 30px;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   width: 200px;
@@ -324,7 +452,7 @@ ul li:hover {
 }
 .contact-card:hover {
   border-color: var(--secondary);
-  background: rgba(139, 92, 246, 0.05);
+  background: rgba(139, 92, 246, 0.1);
   color: var(--text-light);
   transform: translateY(-5px);
 }
@@ -339,6 +467,8 @@ footer {
   font-size: 0.9rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   margin-top: 50px;
+  position: relative;
+  z-index: 1;
 }
 @media(max-width: 768px) {
   .hero-title { font-size: 3rem; }
@@ -347,26 +477,37 @@ footer {
     flex-direction: column;
     text-align: center;
   }
-  
   section h2::after {
     left: 25%;
   }
-
-  nav { gap: 20px; padding: 15px; font-size: 0.85rem;}
-  
+  nav { gap: 15px; padding: 15px; font-size: 0.85rem; flex-wrap: wrap;}
   section {
     margin: 40px 15px;
     padding: 30px 20px;
   }
-  
   .contact-grid { flex-direction: column; align-items: center; }
   .contact-card { width: 100%; max-width: 300px; flex-direction: row; justify-content: flex-start; padding: 20px 30px;}
 }
 </style>
 </head>
 <body>
+<div class="background-animation">
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="grid-overlay"></div>
+</div>
 <div id="intro">
-  <h1 class="welcome-text">Welcome</h1>
+  <svg id="intro-svg" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#0ea5e9" />
+        <stop offset="50%" stop-color="#8b5cf6" />
+        <stop offset="100%" stop-color="#f43f5e" />
+      </linearGradient>
+    </defs>
+    <text id="anim-text" x="50%" y="55%">Welcome</text>
+  </svg>
 </div>
 <header class="hero">
   <h1 class="hero-title">Saswat Palo</h1>
@@ -383,6 +524,7 @@ footer {
   <a href="#about">About</a>
   <a href="#skills">Skills</a>
   <a href="#projects">Projects</a>
+  <a href="#literature">Literature</a>
   <a href="#contact">Contact</a>
 </nav>
 <section id="about">
@@ -416,17 +558,16 @@ footer {
     <li>Java</li>
     <li>HTML & CSS</li>
     <li>Problem Solving</li>
-    <li>Literature</li>
   </ul>
 </section>
 <section id="projects">
-  <h2>Featured Projects</h2>
+  <h2>Featured Projects</h2> 
   <div class="project">
     <h3>Campbuzz</h3>
     <ul class="project-details">
-      <li><strong>Frontend Development:</strong> Built a responsive and user-friendly interface using HTML, CSS, and JavaScript.</li>
+      <li><strong>Frontend Development:</strong> Built a responsive and user-friendly interface using HTML and CSS.</li>
       <li><strong>Project Management:</strong> Coordinated timeline and milestones to keep the team aligned and moving forward.</li>
-      <li><strong>Market Research:</strong> Analyzed student needs to ensure the platform solves real communication gaps on campus.</li>
+      <li><strong>Market Research:</strong> Performed in-depth market research to identify student communication challenges on campus. Studied competitor platforms and analyzed startup business models to support strategic planning and improve the platform's value proposition.</li>
     </ul>
     <div class="btn-group">
       <a href="https://campbuzz.info/" target="_blank" class="github-btn live-link">
@@ -437,7 +578,6 @@ footer {
       </a>
     </div>
   </div>
-
   <div class="project">
     <h3>Electricity Billing System</h3>
     <p>Smart billing system with consumption analytics utilizing logical programming fundamentals.</p>
@@ -456,7 +596,6 @@ footer {
       </a>
     </div>
   </div>
-
   <div class="project">
     <h3>Pizza Order Program</h3>
     <p>An interactive Python application allowing users to fully customize pizza orders and generate automated final billing.</p>
@@ -464,6 +603,48 @@ footer {
       <a href="https://github.com/Saswat-Palo/Pizza-order-program.git" target="_blank" class="github-btn">
         <i class="fa-brands fa-github"></i> View Code
       </a>
+    </div>
+  </div>
+</section>
+<section id="literature">
+  <h2>Literature & Poetry</h2> 
+  <div class="project">
+    <h3><i class="fa-solid fa-pen-nib" style="color: var(--accent);"></i> Teri Khusi </h3>
+    <div class="poetry-text">
+      Ekdin kabhi jo roz milte the<br>
+      Aaj bass baten hoti hai<br>
+      Tujhe dekh ke maine samjha<br>
+      kambakht ishq kya hoti hai<br>
+      Tujhse baat karke maine jana<br>
+      Koyal ki cheh chehat kaisi hoti hai<br>
+      Tere jheel si ankhon mai hum jo fase<br>
+      Ehsas tab hua mohabaat hai sirf tumse<br>
+      Gum nahi agar tu jo na kahe<br>
+      Khusi isime hai ki tu humesha khush rahe<br>
+      Khusi isime hai ki tu humesha khush rahe
+    </div>
+  </div>
+  <div class="project">
+    <h3><i class="fa-solid fa-feather" style="color: var(--secondary);"></i> Thandi Subahen </h3>
+    <div class="poetry-text">
+      Sardiyan darwaze par dastak de rahi hain<br>
+      Phir se wahi thandi subahen aa gayi hain<br>
+      Ruh par thand ki halki si parat hai<br>
+      Hothon pe nami,<br>
+      Dill mein kuch dabii si baat hai.<br>
+      Band kamron mein chadar odhe<br>
+      Kayi dekh rahe bade bade sapne<br>
+      Kisiko apnon ka apna banna hai<br>
+      Kisiko khud ka pyara sa ghar sajana hai.<br>
+      Kahin na kahin, in sardiyon mein hi<br>
+      Akelepan ka sabse gehra ehsas hota hai.<br>
+      Kyuki chutiyon ke baad<br>
+      Woh andar ka bachcha bhi bada ho jata hai.<br>
+      Woh halki halki dhoop ki kiran se,<br>
+      Woh hawle hawle hawa ki lehar se<br>
+      Pyaar sabko hota hai, magar dil mein<br>
+      Armaan dabaye hue har koi<br>
+      Apni mushakkat mein khoya hua hota hai.
     </div>
   </div>
 </section>
@@ -485,7 +666,36 @@ footer {
   </div>
 </section>
 <footer>
-  <p>© 2026 Saswat Palo. All rights reserved.</p>
+  <p>All rights reserved © 2026 Saswat Palo. </p>
 </footer>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const textElement = document.getElementById("anim-text");
+    const introScreen = document.getElementById("intro");   
+    const words = ["Welcome", "Namaste", "नमस्ते"];
+    let wordIndex = 0;
+    function animateWord() {
+      textElement.textContent = words[wordIndex];
+      textElement.classList.remove("draw-text", "erase-text");
+      void textElement.offsetWidth; 
+      textElement.classList.add("draw-text");
+      setTimeout(() => {
+        if (wordIndex < words.length - 1) {
+          textElement.classList.remove("draw-text");
+          textElement.classList.add("erase-text"); 
+          setTimeout(() => {
+            wordIndex++;
+            animateWord();
+          }, 600); 
+        } else {
+          setTimeout(() => {
+            introScreen.classList.add("fade-out-intro");
+          }, 800);
+        }
+      }, 2600); 
+    }
+    setTimeout(animateWord, 300);
+  });
+</script>
 </body>
 </html>
