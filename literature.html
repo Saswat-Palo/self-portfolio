@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Literature & Shayaris - Saswat Palo</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Kalam:wght@700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #000000;
+  --card-dark: rgba(17, 24, 39, 0.45); 
+  --primary: #0ea5e9; 
+  --secondary: #8b5cf6; 
+  --accent: #f43f5e; 
+  --text-light: #f8fafc;
+  --text-muted: #cbd5e1;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  scroll-behavior: smooth;
+  line-height: 1.6;
+  position: relative;
+  opacity: 0;
+  animation: fadeInPage 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+body.fade-out {
+  animation: fadeOutPage 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes fadeInPage {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOutPage {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-15px); }
+}
+.background-animation {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: -1; background: #000; overflow: hidden;
+}
+.glow-orb {
+  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.65;
+  animation: floatOrb 25s infinite linear;
+}
+.orb-1 {
+  width: 50vw; height: 50vw; background: radial-gradient(circle, var(--primary), transparent 70%);
+  top: -20vh; left: -10vw;
+}
+.orb-2 {
+  width: 60vw; height: 60vw; background: radial-gradient(circle, var(--secondary), transparent 70%);
+  bottom: -20vh; right: -10vw; animation-direction: reverse;
+}
+.orb-3 {
+  width: 40vw; height: 40vw; background: radial-gradient(circle, var(--accent), transparent 70%);
+  top: 40vh; left: 30vw; animation-delay: -5s;
+}
+.grid-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  animation: panGrid 15s linear infinite;
+}
+@keyframes floatOrb {
+  0% { transform: rotate(0deg) translate(50px) rotate(0deg); }
+  100% { transform: rotate(360deg) translate(50px) rotate(-360deg); }
+}
+@keyframes panGrid {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+nav {
+  position: sticky; top: 0; background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  display: flex; justify-content: center; padding: 20px; gap: 30px;
+  z-index: 100; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+nav a {
+  color: var(--text-muted); text-decoration: none; font-weight: 500;
+  font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px;
+  transition: color 0.3s ease; position: relative;
+}
+nav a::after {
+  content: ""; position: absolute; width: 0; height: 2px;
+  background: var(--primary); left: 0; bottom: -6px;
+  transition: width 0.3s ease; border-radius: 2px;
+}
+nav a:hover { color: var(--text-light); }
+nav a:hover::after { width: 100%; }
+
+section {
+  max-width: 1000px; margin: 80px auto; padding: 50px;
+  background: var(--card-dark); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px); border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative; z-index: 1;
+}
+section h2 {
+  font-size: 2.2rem; margin-bottom: 40px; display: inline-block; position: relative;
+}
+section h2::after {
+  content: ''; position: absolute; bottom: -8px; left: 0; width: 50%;
+  height: 4px; background: linear-gradient(to right, var(--primary), transparent); border-radius: 2px;
+}
+.project {
+  padding: 30px; margin-bottom: 30px; border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.project:hover {
+  transform: translateY(-8px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+.project h3 {
+  font-size: 1.6rem; color: var(--text-light); margin-bottom: 15px; display: flex; align-items: center; gap: 12px;
+}
+.poetry-text {
+  font-style: italic; color: #e2e8f0; line-height: 1.9; padding-left: 20px;
+  border-left: 3px solid transparent; border-image: linear-gradient(to bottom, var(--primary), var(--secondary)) 1;
+  margin-top: 20px; background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 0 10px 10px 0;
+}
+footer {
+  text-align: center; padding: 40px 20px; color: var(--text-muted);
+  font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 50px; position: relative; z-index: 1;
+}
+@media(max-width: 768px) {
+  nav { gap: 15px; padding: 15px; font-size: 0.85rem; flex-wrap: wrap;}
+  section { margin: 40px 15px; padding: 30px 20px; }
+  section h2::after { left: 25%; }
+}
+</style>
+</head>
+<body>
+<div class="background-animation">
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+  <div class="grid-overlay"></div>
+</div>
+<nav>
+  <a href="index.html" class="page-transition"><i class="fa-solid fa-arrow-left"></i> Home</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#projects">Projects</a>
+  <a href="#literature">Shayaris</a>
+</nav>
+
+<section id="literature" style="margin-top: 50px;">
+  <h2>Literature & Poetry</h2> 
+  <div class="project">
+    <h3><i class="fa-solid fa-pen-nib" style="color: var(--accent);"></i> Teri Khusi </h3>
+    <div class="poetry-text">
+      Ekdin kabhi jo roz milte the<br>
+      Aaj bass baten hoti hai<br>
+      Tujhe dekh ke maine samjha<br>
+      kambakht ishq kya hoti hai<br>
+      Tujhse baat karke maine jana<br>
+      Koyal ki cheh chehat kaisi hoti hai<br>
+      Tere jheel si ankhon mai hum jo fase<br>
+      Ehsas tab hua mohabaat hai sirf tumse<br>
+      Gum nahi agar tu jo na kahe<br>
+      Khusi isime hai ki tu humesha khush rahe<br>
+      Khusi isime hai ki tu humesha khush rahe
+    </div>
+  </div>
+  <div class="project">
+    <h3><i class="fa-solid fa-feather" style="color: var(--secondary);"></i> Thandi Subahen </h3>
+    <div class="poetry-text">
+      Sardiyan darwaze par dastak de rahi hain<br>
+      Phir se wahi thandi subahen aa gayi hain<br>
+      Ruh par thand ki halki si parat hai<br>
+      Hothon pe nami,<br>
+      Dill mein kuch dabii si baat hai.<br>
+      Band kamron mein chadar odhe<br>
+      Kayi dekh rahe bade bade sapne<br>
+      Kisiko apnon ka apna banna hai<br>
+      Kisiko khud ka pyara sa ghar sajana hai.<br>
+      Kahin na kahin, in sardiyon mein hi<br>
+      Akelepan ka sabse gehra ehsas hota hai.<br>
+      Kyuki chutiyon ke baad<br>
+      Woh andar ka bachcha bhi bada ho jata hai.<br>
+      Woh halki halki dhoop ki kiran se,<br>
+      Woh hawle hawle hawa ki lehar se<br>
+      Pyaar sabko hota hai, magar dil mein<br>
+      Armaan dabaye hue har koi<br>
+      Apni mushakkat mein khoya hua hota hai.
+    </div>
+  </div>
+</section>
+<footer>
+  <p>All rights reserved © 2026 Saswat Palo. </p>
+</footer>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const transitionLinks = document.querySelectorAll('.page-transition');
+    transitionLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetUrl = this.getAttribute('href');
+        if (targetUrl && !targetUrl.startsWith('#')) {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = targetUrl;
+          }, 400); 
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
